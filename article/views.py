@@ -3,9 +3,11 @@ from django.http import HttpResponse
 from article.models import Article
 from datetime import datetime
 from django.http import Http404
+from django.template.loader import get_template
+from django.template import Context
+#from django.http import HttpResponse
+#import datetime
 # Create your views here.
-'''def home(request):
-    return HttpResponse("Hello World, Django")'''
 
 
 def detail(request, my_args):
@@ -27,3 +29,11 @@ def detail(request, id):
 
 def test(request) :
     return render(request, 'test.html', {'current_time': datetime.now()})
+
+
+
+def current_datetime(request):
+    now = datetime.now()
+    t = get_template('time.html')
+    html = t.render(Context({'current_date': now}))
+    return HttpResponse(html)
