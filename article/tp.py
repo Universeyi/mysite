@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 # from __future__ import unicode_literals, print_function
 from zhihu_oauth import ZhihuClient
 # from zhihu_oauth.oauth import zhihu_oauth
