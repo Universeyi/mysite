@@ -49,7 +49,7 @@ def detail(request, id):
     return render(request, 'post.html', {'post' : post})
 def pa(request):
     getBestAnswer()
-
+    return HttpResponse('已经获取网页设计下的20个回答')
 def li(request):
     # def getContentDigest(mo):
     #     content = mo.content
@@ -58,7 +58,7 @@ def li(request):
     #     return content
     i = 0
     for mo in Article.objects.all():
-        mo.content =  html2text(mo.content)
+        mo.url =  html2text(mo.content)
         i = 1+i
     return HttpResponse("成功完成%d个元素的操作"%i)
 # def test(request) :

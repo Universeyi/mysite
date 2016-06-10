@@ -5,8 +5,9 @@
     {% for post in post_list %}
         <section class="post">
             <header class="post-header">
-                <h2 class="post-title">{{ post.title }}</h2>
-
+                <h2 class="post-title">
+                    <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
+                </h2>
                     <p class="post-meta">
                         Time:  <a class="post-author" href="#">{{ post.date_time }}</a> <a class="post-category post-category-js" href="#">{{ post.category }}</a>
                     </p>
@@ -14,7 +15,7 @@
 
                 <div class="post-description">
                     <p>
-                        {{ post.content|safe }}
+                        {{ post.content|safe | truncatewords:"15" }}
                     </p>
                 </div>
         </section>
