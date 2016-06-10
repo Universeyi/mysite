@@ -9,6 +9,7 @@ from django.template import Context
 from django.http import HttpResponse
 from article.tp import getBestAnswer
 from html2text import html2text
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #import datetime
 # Create your views here.
 
@@ -21,10 +22,24 @@ def detail(request, my_args):
     
 #TODO 这里只是为了测试方便，将queryset转换为list进行操作，以后希望将更新的信息保存在数据库中。
 def home(request):
-    #post_list = list(Article.objects.all()).append(getBestAnserwer())#    #获取全部的Article对象
-    post_list= Article.objects.all()
-    return render(request, 'home.html', {'post_list' : post_list})
-    #return HttpResponse(post_list[0].content)
+    contact_list = Article.objects.all()
+    paginator = Paginator(contact_list, 7)  # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages)
+
+    return render(request, 'home.html', {'post_list': contacts})
+
+
+    # post_list= Article.objects.all()
+    # return render(request, 'home.html', {'post_list' : post_list})
+
 
 def detail(request, id):
     try:
