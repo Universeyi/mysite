@@ -23,5 +23,7 @@ urlpatterns = [
     #url(r'^test/$', 'article.views.test'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'article.views.home'),
+    url(r'^pa$','article.views.pa'),
+    url(r'^li$','article.views.li'),
     #url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
 ]
